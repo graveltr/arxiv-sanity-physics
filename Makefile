@@ -7,3 +7,9 @@ up:
 # I use this to run the server
 fun:
 	export FLASK_APP=serve.py; flask run
+
+dockerBuild:
+	docker build -t graveltr/arxiv-sanity-physics:v1.0 .
+
+dockerPush: 
+	docker push graveltr/arxiv-sanity-physics:v1.0
