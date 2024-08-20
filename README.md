@@ -1,3 +1,36 @@
+# arxiv-sanity-physics
+
+This is a fork of https://github.com/karpathy/arxiv-sanity-lite. It has two main differences:
+
+1. It queries the [arXiv](https://arxiv.org) api for recent posts in gr-qc and hep-th. 
+
+This was accomplished by changing one line in arxiv_daemon.py. In particular, we use the custom query
+
+```
+q = 'cat:gr-qc+OR+cat:hep-th'
+```
+
+2. I've added self-hosting infrastructure. In particular, I've included a Dockerfile that sets up the 
+Flask server and also sets up a cronjob scheduled to run everyday. An example docker-compose.yaml might
+be:
+
+```
+version: '3.8'
+
+services:
+  app:
+    image: graveltr/arxiv-sanity-physics:v1.0
+    container_name: arxiv-sanity-physics
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./data:/app/data
+    restart: always
+```
+
+This pulls my custom image from https://hub.docker.com/, port maps the necessary Flask port, and sets up a permanent volume to store the database and model parameters.
+
+Once setup, the application is accessed via port 5000 at your hosting machine's ip. 
 
 # arxiv-sanity-lite
 
