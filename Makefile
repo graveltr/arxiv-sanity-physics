@@ -13,3 +13,8 @@ dockerBuild:
 
 dockerPush: 
 	docker push graveltr/arxiv-sanity-physics:v1.0
+
+gitPush:
+	git add -u
+	git commit -m "Pushing"
+	git push origin master
